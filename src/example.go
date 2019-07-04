@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 func main() {
 	r := gin.Default()
@@ -9,5 +12,11 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	r.GET("/ping/:id", func(c *gin.Context) {
+		id := c.Param("id")
+		c.String(http.StatusOK, "Hello %s", id)
+	})
+
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
