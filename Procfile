@@ -1,1 +1,1 @@
-web: src/example
+web: src
