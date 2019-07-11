@@ -48,7 +48,9 @@ func main() {
 		id := c.Param("id")
 		c.JSON(200, gin.H(requestBodyMap))
 
-		err := m.BroadcastFilter(buf, func(q *melody.Session) bool {
+		jsonRequestBody, _ := json.Marshal(requestBodyMap)
+
+		err := m.BroadcastFilter(jsonRequestBody, func(q *melody.Session) bool {
 			url, exists := q.Get("url")
 			if exists && strings.Contains(url.(string), id) {
 				return true
